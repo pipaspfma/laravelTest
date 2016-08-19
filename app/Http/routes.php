@@ -31,6 +31,10 @@ Route::get('/about', 'IndexController@about');
 Route::get('/contacts', 'IndexController@contacts');
 
 
+Route::get('/settings', 'BackOfficeController@index');
+
+Route::post('/settings/update', 'BackOfficeController@store');
+
 //por usar
 
 Route::get('/search/{text}', 'IndexController@simpleSearch');
