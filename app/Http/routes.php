@@ -42,3 +42,7 @@ Route::get('/search/{text}', 'IndexController@simpleSearch');
 Route::get('advancedSearch','HomeController@advandecSearch');
 
 Route::post('newsletter', 'HomeController@newsletter');
+
+// para testes
+
+Route::get('/report' , 'BackOfficeController@report');
