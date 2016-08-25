@@ -35,6 +35,8 @@ Route::get('/settings', 'BackOfficeController@index');
 
 Route::post('/settings/update', 'BackOfficeController@store');
 
+Route::post('/settings/updateLogo', 'BackOfficeController@logo');
+
 //por usar
 
 Route::get('/search/{text}', 'IndexController@simpleSearch');

@@ -34,20 +34,20 @@
     <hr class="featurette-divider">
 
 
-    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/settings/update') }}">
+    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/settings/updateLogo') }}">
         {{ csrf_field() }}
 
         <div class="form-group">
-            <label for="upload_file" class="control-label col-sm-3">Upload File</label>
+            <label for="upload_file" class="control-label col-sm-3">Change Perfil Photo</label>
             <div class="col-sm-9">
-                <input class="form-control" type="file" name="image" id="upload_file">
+                <input class="form-control" type="file" name="logo" id="upload_file">
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-btn fa-user"></i> Upload CV
+                    <i class="fa fa-btn fa-user"></i> Upload
                 </button>
             </div>
         </div>
