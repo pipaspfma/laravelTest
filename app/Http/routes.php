@@ -33,9 +33,13 @@ Route::get('/contacts', 'IndexController@contacts');
 
 Route::get('/settings', 'BackOfficeController@index');
 
-Route::post('/settings/update', 'BackOfficeController@store');
+Route::post('/settings/addCV', 'BackOfficeController@addCV');
 
-Route::post('/settings/updateLogo', 'BackOfficeController@logo');
+Route::post('/settings/addLogo', 'BackOfficeController@addLogo');
+
+Route::get('/jobOffer/create', 'JobOfferController@formCreate');
+
+Route::post('/jobOffer/create', 'JobOfferController@store');
 
 //por usar
 

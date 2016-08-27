@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('firstName');
             $table->string('lastName');
-            $table->string('imageLogo')->nullable();
+            $table->string('photo')->nullable();
             $table->integer('typeUser')->default(0); // 0 - Normal User | 1 - Company
             $table->boolean('isAdmin')->default(0);
             $table->rememberToken();

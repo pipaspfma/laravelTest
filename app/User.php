@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'typeUser','isAdmin', 'firstName', 'lastName', 'imageLogo'
+        'id','email', 'password', 'typeUser','isAdmin', 'firstName', 'lastName', 'photo'
     ];
 
     /**
@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function photo()
+    {
+        if(file_exists( public_path() . '/images/logos/' . $this->photo)) {
+        return '/images/logos/' . $this->photo;
+        } else {
+            return '/images/logos/default.jpg';
+        }
+    }
 }
