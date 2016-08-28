@@ -32,4 +32,26 @@ class User extends Authenticatable
             return '/images/logos/default.jpg';
         }
     }
+
+    public function isCandidate()
+    {
+        if($this->typeUser == 0 || $this->isAdmin == 1){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function isCompany()
+    {
+        if($this->typeUser == 1 || $this->isAdmin == 1){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

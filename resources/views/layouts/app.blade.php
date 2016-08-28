@@ -50,21 +50,32 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('/home') }}">Home</a></li>
-                <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{ url('/about') }}">About</a></li>
-                <li class="{{ Request::is('contacts') ? 'active' : '' }}"><a href="{{ url('/contacts') }}">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                @if (Auth::guest())
+                    <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('/home') }}">Home</a></li>
+                    <li class="{{ Request::is('search') ? 'active' : '' }}"><a href="{{ url('/search') }}">Search</a></li>
+                    <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{ url('/about') }}">About</a></li>
+                @elseif(Auth::user()->typeUser == 0 || Auth::user()->isAdmin == 1)
+                    <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('/home') }}">Home</a></li>
+                    <li class="{{ Request::is('favorite') ? 'active' : '' }}"><a href="{{ url('/favorite') }}">Favorite</a></li>
+                    <li class="{{ Request::is('curriculum') ? 'active' : '' }}"><a href="{{ url('/curriculum') }}">Curriculum</a></li>
+                    <li class="{{ Request::is('statistics') ? 'active' : '' }}"><a href="{{ url('/statistics') }}">Statistics</a></li>
+                @elseif(Auth::user()->typeUser == 1 || Auth::user()->isAdmin == 1)
+                    <li class="{{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('/home') }}">Home</a></li>
+                    <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{ url('/about') }}">About</a></li>
+                    <li class="{{ Request::is('contacts') ? 'active' : '' }}"><a href="{{ url('/contacts') }}">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
@@ -73,28 +84,39 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->firstName }} {{ Auth::user()->lastName }} <span class="caret"></span>
-                        </a>
+                    @if(Auth::user()->typeUser == 0 || Auth::user()->isAdmin == 1)
+                        <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->firstName }} {{ Auth::user()->lastName }} <span class="caret"></span>
+                            </a>
 
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/settings') }}"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</a></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</a></li>
-                        </ul>
-                    </li>
+                            <ul class="dropdown-menu" role="menu">
+                                @if(Auth::user()->typeUser == 1 || Auth::user()->isAdmin == 1)
+                                    <li><a href="{{ url('/jobOffer') }}"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Jobs Offers</a></li>
+                                @endif
+                                <li><a href="{{ url('/settings') }}"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</a></li>
+                            </ul>
+                        </li>
+                    @elseif(Auth::user()->typeUser == 1 || Auth::user()->isAdmin == 1)
+                        <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->firstName }} {{ Auth::user()->lastName }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                @if(Auth::user()->typeUser == 1 || Auth::user()->isAdmin == 1)
+                                    <li><a href="{{ url('/jobOffer') }}"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Jobs Offers</a></li>
+                                @endif
+                                <li><a href="{{ url('/settings') }}"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</a></li>
+                            </ul>
+                        </li>
+                    @endif
                 @endif
             </ul>
-            <div class="col-sm-3 col-md-3 pull-right">
-                <form class="navbar-form" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="q">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div><!--/.nav-collapse -->
     </div>
 </nav>

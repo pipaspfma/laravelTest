@@ -37,11 +37,15 @@ Route::post('/settings/addCV', 'BackOfficeController@addCV');
 
 Route::post('/settings/addLogo', 'BackOfficeController@addLogo');
 
+Route::get('/jobOffer', 'JobOfferController@index');
+
 Route::get('/jobOffer/create', 'JobOfferController@formCreate');
 
 Route::post('/jobOffer/create', 'JobOfferController@store');
 
 //por usar
+
+Route::get('/curriculum', 'CandidateController@curriculum');
 
 Route::get('/search/{text}', 'IndexController@simpleSearch');
 

@@ -17,7 +17,7 @@
     </div>
 
     <hr class="featurette-divider">
-
+    create link, type -> <script language=Javascript src="/promo_link.asp?REF=">  </script>
     <div class="row">
 
         <div class="col-md-3 column ui-sortable">
