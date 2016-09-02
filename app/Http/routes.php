@@ -23,36 +23,61 @@ Route::get('/teste' , function(){
     return view('auth.register1');
 });
 
-
-//incompletos
+//GUEST --- not working ---
 
 Route::get('/about', 'IndexController@about');
 
 Route::get('/contacts', 'IndexController@contacts');
 
-
-Route::get('/settings', 'BackOfficeController@index');
-
-Route::post('/settings/addCV', 'BackOfficeController@addCV');
-
-Route::post('/settings/addLogo', 'BackOfficeController@addLogo');
-
-Route::get('/jobOffer', 'JobOfferController@index');
-
-Route::get('/jobOffer/create', 'JobOfferController@formCreate');
-
-Route::post('/jobOffer/create', 'JobOfferController@store');
-
-//por usar
-
-Route::get('/curriculum', 'CandidateController@curriculum');
-
 Route::get('/search/{text}', 'IndexController@simpleSearch');
 
-Route::get('advancedSearch','HomeController@advandecSearch');
+Route::get('/advancedSearch/{text}','HomeController@advancedSearch');
+
+Route::get('/advancedSearch/{text}','HomeController@advancedSearch');
 
 Route::post('newsletter', 'HomeController@newsletter');
 
+Route::get('/jobOffer/{id}', 'JobOfferController@show');
 // para testes
 
 Route::get('/report' , 'BackOfficeController@report');
+
+Route::group(['middleware' => ['auth']], function()
+{
+    //Registered only
+    Route::get('/settings', 'BackOfficeController@index');
+    Route::post('/settings/addLogo', 'BackOfficeController@addLogo');
+
+// --- not working ---
+    Route::get('/message', 'MessageController@index');
+    Route::get('/message/{id}', 'MessageController@show');
+    Route::get('/message/new', 'MessageController@');
+    Route::get('/message/new', 'MessageController@store');
+
+//candidate only -- need to change to /curriculum ...
+    Route::post('/settings/addCV', 'BackOfficeController@addCV');
+    Route::get('/curriculum', 'CandidateController@curriculum');
+    Route::post('/curriculum/new', 'CandidateController@storeCurriculum');
+    Route::get('/favorite', 'CandidateController@favorite');
+// --- not working ---
+
+
+    Route::get('/curriculum/new', 'CandidateController@addCurriculum'); // probably need some changes
+
+    Route::post('/curriculum/{id}/delete', 'CandidateController@deleteCurriculum');
+
+//Company only
+    Route::get('/jobOffer', 'JobOfferController@index');
+
+    Route::get('/jobOffer/create', 'JobOfferController@formCreate');
+
+    Route::post('/jobOffer/create', 'JobOfferController@store');
+
+
+// --- not working ---
+
+});
+
+
+
+

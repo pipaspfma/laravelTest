@@ -9,7 +9,6 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
-                        'username', 'email', 'password', 'typeUser','isAdmin', 'firstName', 'LastName', 'imageLogo'
                         <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
                             <label for="first-name" class="col-md-4 control-label">First Name</label>
 
@@ -81,10 +80,13 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('typeUser') ? ' has-error' : '' }}">
-                            <label for="TypeUserId" class="col-md-4 control-label">Type User</label>
+                            <label for="TypeUserId" class="col-md-4 control-label">Type Account</label>
 
                             <div class="col-md-6">
-                                <input id="TypeUserId" type="text" class="form-control" name="typeUser">
+                                <select id="TypeUserId" class="form-control" name="typeUser">
+                                    <option value="0">Candidate</option>
+                                    <option value="1">Company</option>
+                                </select>
 
                                 @if ($errors->has('typeUser'))
                                     <span class="help-block">

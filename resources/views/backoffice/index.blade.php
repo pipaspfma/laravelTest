@@ -21,7 +21,7 @@
     <div class="row">
 
         <div class="col-md-3 column ui-sortable">
-        <img height="200" width="200" src="{!! Auth::user()->photo() !!}" alt="">
+        <img height="200" width="200" src="{{ Auth::user()->photo() }}" alt="">
         </div>
         <div class="col-md-9 column ui-sortable">
             teste
